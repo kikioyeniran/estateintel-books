@@ -24,21 +24,216 @@ This will set up all the project dependencies, packages and the like.
 After that run this command
     <br><code>php artisan migrate</code>
     <br>
-    This will set up the database adn run all the migrations
+    This will set up the database and run all the migrations
 </p>
 <p align="left">
+    Finally run this command to get the application running
+    <br><code>php artisan serve</code>
+    <br>
+    With this the applicatio should be up and running.
+</p>
+<p align="left">
+    To run the test scripts, run this command
+    <br><code>php artisan test</code>
+    <br>
+    Only run this after setting up the application
+</p>
+<p align="left">
+    Below is a list of API endpoints and how to use them
+    <br>
+    1. Fetch Books (GET REQUEST)
+    <br><code>http://estate-intel.dop/api/v1/books</code>
+    <br>
+    This will Fetch Books Already Added to the Database. <br>
+    The API response should look like this
+    <code>
+    {
+        "data": [
+            {
+                "id": 5,
+                "name": "Knives Inside",
+                "isbn": "978-0553103540",
+                "number_of_pages": 490,
+                "publisher": "Bantam Sons",
+                "country": "Nigeria",
+                "release_date": "1996-01-01",
+                "authors": [
+                    "Maya Angelou"
+                ]
+            }
+        ],
+        "status_code": 200,
+        "status": "success"
+    }
+</code>
+</p>
+<p align="left">
+    <br>
+    2. Create or Add New Book (POST REQUEST)
+    <br><code>http://estate-intel.dop/api/v1/books</code>
+    <br>
+    Add a new book object to the database<br>
+    The API response should look like this <br>
+    The payload should follow this pattern:
+    name (Valid Name String) <br>
+    isbn    (Example: 978-0553103540) <br>
+    authors[] String name of authors (accepts an array) <br>
+    publisher    Valid Publisher name string <br>
+    country    Country name string <br>
+    release_date    Valid Date String <br>
+    number_of_pages Integer number of book pages <br>
+    The result should look like this
+<code>
+    {
+    "data": [
+        {
+        "id": 5,
+        "name": "Knives Inside",
+        "isbn": "978-0553103540",
+        "number_of_pages": 490,
+        "publisher": "Bantam Sons",
+        "country": "Nigeria",
+        "release_date": "1996-01-01",
+        "authors": [
+        "Maya Angelou"
+        ]
+        }
+        ],
+    "status_code": 200,
+    "status": "success"
+    }
+</code>
+</p>
+
+<p align="left">
+    Below is a list of API endpoints and how to use them
+    <br>
+    3. External Books API (GET REQUEST)
+    <br><code>http://estate-intel.dop/api/v1/external-books</code>
+    <br>
+    Fetch books from external fire and ice API
+    With an optional name search query parameter to filter the request results <br>
+    The API response should look like this
+    <code>
+    {
+        "data": [
+            {
+                "id": 5,
+                "name": "Knives Inside",
+                "isbn": "978-0553103540",
+                "number_of_pages": 490,
+                "publisher": "Bantam Sons",
+                "country": "Nigeria",
+                "release_date": "1996-01-01",
+                "authors": [
+                    "Maya Angelou"
+                ]
+            }
+        ],
+        "status_code": 200,
+        "status": "success"
+    }
+</code>
+
+<p align="left">
+    <br>
+    4. Update Book (PATCH REQUEST)
+    <br><code>http://estate-intel.dop/api/v1/books/20</code>
+    <br>
+    Update book object to the database<br>
+    The API response should look like this <br>
+    The payload should follow this pattern:
+    name (Valid Name String) <br>
+    isbn    (Example: 978-0553103540) <br>
+    authors[] String name of authors (accepts an array) <br>
+    publisher    Valid Publisher name string <br>
+    country    Country name string <br>
+    release_date    Valid Date String <br>
+    number_of_pages Integer number of book pages <br>
+    The result should look like this
+<code>
+    {
+    "data": [
+        {
+        "id": 5,
+        "name": "Knives Inside",
+        "isbn": "978-0553103540",
+        "number_of_pages": 490,
+        "publisher": "Bantam Sons",
+        "country": "Nigeria",
+        "release_date": "1996-01-01",
+        "authors": [
+        "Maya Angelou"
+        ]
+        }
+        ],
+"   status_code": 200,
+    "status": "success",
+    "message": "The book My New Name was updated successfully"    }
+</code>
+</p>
+<p align="left">
+    <br>
+    5. View Single Book (GET REQUEST)
+    <br><code>http://estate-intel.dop/api/v1/books/20</code>
+    <br>
+    This will Fetch A Single Book Already Added to the Database. <br>
+    The API response should look like this
+    <code>
+    {
+        "data": [
+            {
+                "id": 5,
+                "name": "Knives Inside",
+                "isbn": "978-0553103540",
+                "number_of_pages": 490,
+                "publisher": "Bantam Sons",
+                "country": "Nigeria",
+                "release_date": "1996-01-01",
+                "authors": [
+                    "Maya Angelou"
+                ]
+            }
+        ],
+        "status_code": 200,
+        "status": "success"
+    }
+</code>
+</p>
+<p align="left">
+    <br>
+    6. Delete Single Book (DELETE REQUEST)
+    <br><code>http://estate-intel.dop/api/v1/books/20</code>
+    <br>
+    This will Delete A Single Book Already Added to the Database. <br>
+    The API response should look like this
+    <code>
+    {
+        "data": [
+            {
+                "id": 5,
+                "name": "Knives Inside",
+                "isbn": "978-0553103540",
+                "number_of_pages": 490,
+                "publisher": "Bantam Sons",
+                "country": "Nigeria",
+                "release_date": "1996-01-01",
+                "authors": [
+                    "Maya Angelou"
+                ]
+            }
+        ],
+        "status_code": 200,
+        "status": "success"
+         "message": "The book 'My New Name' was deleted successfully"
+    }
+</code>
+</p>
+<!-- <p align="left">
     <br><code></code>
     <br>
 </p>
 <p align="left">
     <br><code></code>
     <br>
-</p>
-<p align="left">
-    <br><code></code>
-    <br>
-</p>
-<p align="left">
-    <br><code></code>
-    <br>
-</p>
+</p> -->
