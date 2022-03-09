@@ -14,45 +14,44 @@ use Illuminate\Validation\ValidationException;
 class BookController extends Controller
 {
     // Handle Match Route and send appropriate response
-    public function index(Request $request)
-    {
-        switch ($request->method()) {
-            case 'POST':
-                # code...
-                Log::alert($request->all());
-                return $this->store($request);
-                break;
+    // public function index(Request $request)
+    // {
+    //     switch ($request->method()) {
+    //         case 'POST':
+    //             # code...
+    //
+    //             return $this->store($request);
+    //             break;
 
-            case 'GET':
-                return $this->fetchBooks();
-                break;
-            default:
-                # code...
-                break;
-        }
-    }
+    //         case 'GET':
+    //             return $this->fetchBooks();
+    //             break;
+    //         default:
+    //             # code...
+    //             break;
+    //     }
+    // }
 
-    public function update(Request $request, $id)
-    {
-        switch ($request->method()) {
-            case 'PATCH':
-                # code...
-                Log::alert($request->all());
-                return $this->patch($request, $id);
-                break;
+    // public function update(Request $request, $id)
+    // {
+    //     switch ($request->method()) {
+    //         case 'PATCH':
+    //             # code...
+    //             return $this->patch($request, $id);
+    //             break;
 
-            case 'GET':
-                return $this->show($id);
-                break;
-            default:
-                # code...
-                break;
-        }
-    }
+    //         case 'GET':
+    //             return $this->show($id);
+    //             break;
+    //         default:
+    //             # code...
+    //             break;
+    //     }
+    // }
 
 
     // Fetch All Books From Database
-    public function fetchBooks()
+    public function index()
     {
         try {
             //code...
@@ -125,29 +124,30 @@ class BookController extends Controller
     {
         try {
             $this->validate($request, [
-                'name' => 'required|bail|string',
-                'isbn' => 'required|bail|string',
-                'number_of_pages' => 'required|bail|integer|numeric',
-                'publisher' => 'required|bail|string',
-                'country' => 'required|bail|string',
-                'release_date' => 'required|bail|date',
-                'authors.*' => 'required|bail',
+                'name' => 'bail|string',
+                'isbn' => 'bail|string',
+                'number_of_pages' => 'bail|integer|numeric',
+                'publisher' => 'bail|string',
+                'country' => 'bail|string',
+                'release_date' => 'bail|date',
+                'authors.*' => 'bail',
             ]);
 
             $book = Book::find($id);
-            $book->name = $request->name;
-            $book->isbn = $request->isbn;
-            $book->number_of_pages = $request->number_of_pages;
-            $book->publisher = $request->publisher;
-            $book->country = $request->country;
-            $book->release_date = $request->release_date;
+            $book->name = $request->name == null ? $book->name : $request->name;
+            $book->isbn = $request->isbn == null ? $book->isbn : $request->isbn;
+            $book->number_of_pages = $request->number_of_pages == null ? $book->number_of_pages : $request->number_of_pages;
+            $book->publisher = $request->publisher == null ? $book->publisher : $request->publisher;
+            $book->country = $request->country == null ? $book->country : $request->country;
+            $book->release_date = $request->release_date == null ? $book->release_date : $request->release_date;
             $book->save();
 
             if ($request->authors != null) {
-                $existing_authors = BookAuthor::where('book_id', $book)->get();
+                $existing_authors = BookAuthor::where('book_id', $id)->get();
                 foreach ($existing_authors as $existing_author) {
                     $existing_author->delete();
                 }
+
                 foreach ($request->authors as $key => $author) {
                     $book_author = new BookAuthor();
                     $book_author->name = $author;

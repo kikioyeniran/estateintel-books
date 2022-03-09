@@ -20,9 +20,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::match(['get', 'post'], '/books', [BookController::class, 'index'])->name('books.index');
+    // Route::match(['get', 'post'], '/books', [BookController::class, 'index'])->name('books.index');
 
-    Route::match(['patch', 'post'], '/books/{id}', [BookController::class, 'update'])->name('books.update');
+    // Route::match(['patch', 'get'], '/books/{id}', [BookController::class, 'update'])->name('books.update');
+
+    Route::post('/books', [BookController::class, 'index'])->name('books.index');
+
+    Route::post('/books', [BookController::class, 'store'])->name('books.create');
+
+    Route::patch('/books/{id}', [BookController::class, 'patch'])->name('books.patch');
+
+    Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
 
     Route::delete('/books/{id}', [BookController::class, 'delete'])->name('books.delete');
 
