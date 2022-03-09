@@ -39,6 +39,14 @@ After that run this command
     Only run this after setting up the application
 </p>
 <p align="left">
+    For your convenience I have published a postman documentation that can easily be used to test these endpoint <br>
+    Click this link to view it
+    <br><a href="https://documenter.getpostman.com/view/7811904/UVsFyoZa">POSTMAN DOCUMENTATION (https://documenter.getpostman.com/view/7811904/UVsFyoZa)</a>
+    <br>
+    Only run this after setting up the application
+</p>
+
+<p align="left">
     Below is a list of API endpoints and how to use them
     <br>
     1. Fetch Books (GET REQUEST)
@@ -46,7 +54,7 @@ After that run this command
     <br>
     This will Fetch Books Already Added to the Database. <br>
     The API response should look like this
-    <code>
+    <br><code>
     {
         "data": [
             {
@@ -83,7 +91,7 @@ After that run this command
     release_date    Valid Date String <br>
     number_of_pages Integer number of book pages <br>
     The result should look like this
-<code>
+<br><code>
     {
     "data": [
         {
@@ -114,7 +122,7 @@ After that run this command
     Fetch books from external fire and ice API
     With an optional name search query parameter to filter the request results <br>
     The API response should look like this
-    <code>
+    <br><code>
     {
         "data": [
             {
@@ -151,7 +159,7 @@ After that run this command
     release_date    Valid Date String <br>
     number_of_pages Integer number of book pages <br>
     The result should look like this
-<code>
+<br><code>
     {
     "data": [
         {
@@ -179,7 +187,7 @@ After that run this command
     <br>
     This will Fetch A Single Book Already Added to the Database. <br>
     The API response should look like this
-    <code>
+    <br><code>
     {
         "data": [
             {
@@ -207,7 +215,7 @@ After that run this command
     <br>
     This will Delete A Single Book Already Added to the Database. <br>
     The API response should look like this
-    <code>
+    <br><code>
     {
         "data": [
             {
