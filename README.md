@@ -21,7 +21,7 @@ This will set up all the project dependencies, packages and the like.
 </p>
 
 <p align="left">
-After that run this command
+    After that run this command
     <br><code>php artisan migrate</code>
     <br>
     This will set up the database and run all the migrations

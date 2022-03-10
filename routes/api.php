@@ -28,9 +28,9 @@ Route::prefix('v1')->group(function () {
 
     Route::post('/books', [BookController::class, 'store'])->name('books.create');
 
-    Route::patch('/books/{id}', [BookController::class, 'patch'])->name('books.patch');
+    Route::patch('/books/{book}', [BookController::class, 'patch'])->name('books.patch');
 
-    Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
+    Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 
     Route::delete('/books/{id}', [BookController::class, 'delete'])->name('books.delete');
 

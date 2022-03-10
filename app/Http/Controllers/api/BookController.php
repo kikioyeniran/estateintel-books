@@ -120,7 +120,7 @@ class BookController extends Controller
     }
 
     // Update Book information in the Database
-    public function patch(Request $request, $id)
+    public function patch(Request $request, Book $book)
     {
         try {
             $this->validate($request, [
@@ -133,7 +133,6 @@ class BookController extends Controller
                 'authors.*' => 'bail',
             ]);
 
-            $book = Book::find($id);
             $book->name = $request->name == null ? $book->name : $request->name;
             $book->isbn = $request->isbn == null ? $book->isbn : $request->isbn;
             $book->number_of_pages = $request->number_of_pages == null ? $book->number_of_pages : $request->number_of_pages;
@@ -143,7 +142,7 @@ class BookController extends Controller
             $book->save();
 
             if ($request->authors != null) {
-                $existing_authors = BookAuthor::where('book_id', $id)->get();
+                $existing_authors = BookAuthor::where('book_id', $book)->get();
                 foreach ($existing_authors as $existing_author) {
                     $existing_author->delete();
                 }
@@ -196,11 +195,10 @@ class BookController extends Controller
     }
 
     // Show Specific Book Detail
-    public function show($id)
+    public function show(Book $book)
     {
         try {
             //code...
-            $book = Book::findOrFail($id);
             return response()->json([
                 'data' => $book,
                 'status_code' => 200,
